@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "in-delivery-text-generator"
+version = "0.1.0"
+description = ""
+authors = ["Deverty <bychenkov.a.k@edu.mirea.ru>"]
+readme = "README.md"
+packages = [{include = "in_delivery_text_generator"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.3.5"
+ipykernel = "^6.27.0"
+aiohttp = "^3.9.0"
+fastapi = "^0.104.1"
+python-dotenv = "^1.0.0"
+uvicorn = "^0.24.0.post1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
