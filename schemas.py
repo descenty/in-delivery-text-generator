@@ -21,6 +21,6 @@ product_fields: list[str] = [
 ]
 
 category_fields: list[str] = [
-    "slug (e.g. fruits-vegetables)",
-    "title (e.g. 'Vegetables, fruits, nuts')"
+    "slug (e.g. apples, if need to use two words use '-' as divider)",
+    "title (e.g. 'Apples')"
 ]
