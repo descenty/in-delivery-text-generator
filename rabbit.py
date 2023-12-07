@@ -15,14 +15,14 @@ async def generate_subcategories(message: GenerateSubcategoriesRequest):
         "messages": [
             {
                 "role": "system",
-                "content": f"generate as json array of objects with fields: {', '.join(category_fields)}\nyou need to generate only what the user needs in json format",
+                "content": 'you are a json-generator, generate response as json array of objects\njson schema: {"slug": string, "title": string}, for example {"slug": "fruits-vegetables", "title": "Fruits and Vegetables"}\ndo not write any other words or introduction\ndo not use any escape-sequences like \\n newline character, just raw json format\n',
             },
             {
                 "role": "user",
                 "content": f"generate only {message.count} subcategory objects for '{message.category_title}' category",
             },
         ],
-        "temperature": 0.7,
+        "temperature": 0.3,
         "max_tokens": -1,
         "stream": False,
     }
