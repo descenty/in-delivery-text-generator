@@ -18,7 +18,6 @@ product_fields = [
     "nutrition: {energy (float), protein (float), fat (float), carbohydrates (float)}",
 ]
 
-
 app = FastAPI(lifespan=rabbit_router.lifespan_context)
 
 
@@ -57,4 +56,4 @@ async def generate_products(request: GenerateProductsRequest):
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8001)

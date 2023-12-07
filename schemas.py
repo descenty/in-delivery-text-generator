@@ -11,6 +11,18 @@ class GenerateProductsRequest(BaseModel):
     count: int
 
 
+class ModelGenerationPrompt(BaseModel):
+    object_type: type[BaseModel]
+    object_description: str
+    example: BaseModel
+    count: int
+
+
+class Category(BaseModel):
+    slug: str
+    title: str
+
+
 product_fields: list[str] = [
     "title (str)",
     "description (str)",
@@ -22,5 +34,5 @@ product_fields: list[str] = [
 
 category_fields: list[str] = [
     "slug (e.g. apples, if need to use two words use '-' as divider)",
-    "title (e.g. 'Apples')"
+    "title (e.g. 'Apples')",
 ]
