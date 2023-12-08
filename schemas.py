@@ -4,6 +4,7 @@ from pydantic import BaseModel
 class GenerateSubcategoriesRequest(BaseModel):
     category_title: str
     count: int
+    additional_prompt: str = ""
 
 
 class GenerateProductsRequest(BaseModel):
@@ -16,6 +17,7 @@ class ModelGenerationPrompt(BaseModel):
     object_description: str
     example: BaseModel
     count: int
+    additional_prompt: str = ""
 
 
 class Category(BaseModel):

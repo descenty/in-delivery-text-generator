@@ -1,22 +1,31 @@
-from faststream.rabbit.fastapi import RabbitRouter
+from dotenv import load_dotenv
+from faststream.rabbit import RabbitBroker
 from os import getenv
 from llama.generator import generate_json_response
 
 from schemas import Category, GenerateSubcategoriesRequest, ModelGenerationPrompt
 
-rabbit_router = RabbitRouter(getenv("RABBITMQ_HOST"))
+load_dotenv()
+
+broker = RabbitBroker(getenv("RABBITMQ_HOST"))
 
 
-@rabbit_router.subscriber("generate-subcategories")
+@broker.subscriber("generate-subcategories")
 async def generate_subcategories(message: GenerateSubcategoriesRequest):
-    return generate_json_response(
+    json_response = generate_json_response(
         ModelGenerationPrompt(
             object_type=Category,
-            object_description=f"subcategories for category '{message.category_title}'",
+            object_description=f"subcategories for '{message.category_title}' category",
+            additional_prompt=message.additional_prompt,
             example=Category(slug="fruits-vegetables", title="Fruits and Vegetables"),
             count=message.count,
         )
     )
+    for entry in json_response:
+        entry["slug"] = entry["slug"].replace("_", "-")
+        entry["title"] = entry["title"].capitalize()
+
+    return json_response
 
 
 # @rabbit_router.subscriber("generate-subcategories")

@@ -4,7 +4,10 @@ version = "0.1.0"
 description = ""
 authors = ["Deverty <bychenkov.a.k@edu.mirea.ru>"]
 readme = "README.md"
-packages = [{include = "in_delivery_text_generator"}]
+packages = [{ include = "in_delivery_text_generator" }]
+
+[tool.poe.tasks]
+run = "faststream run main:app"
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -13,7 +16,7 @@ ipykernel = "^6.27.0"
 fastapi = "^0.104.1"
 python-dotenv = "^1.0.0"
 uvicorn = "^0.24.0.post1"
-faststream = {extras = ["rabbit"], version = "^0.3.1"}
+faststream = { extras = ["rabbit"], version = "^0.3.1" }
 llama-cpp-python = "^0.2.20"
 
 
