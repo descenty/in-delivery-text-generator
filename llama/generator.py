@@ -13,11 +13,12 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
     prompt = (
         f"JSON schema for generation (generate only with this schema): {json_schema}\n"
     )
-    prompt += f"Example of object: {generation_prompt.example.model_dump()}\n"
+    if generation_prompt.example:
+        prompt += f"Example of object: {generation_prompt.example.model_dump()}\n"
     if generation_prompt.additional_prompt:
         prompt += f"Additional information: {generation_prompt.additional_prompt}\n"
     prompt += f"Generate a JSON list of {generation_prompt.count} {generation_prompt.object_description}"
-    print(prompt)
+    # print(prompt)
 
     while True:
         try:
@@ -29,7 +30,6 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
             count = 0
             for output in response:
                 result += output["choices"][0]["text"]
-                print(result)
                 if count % 15 == 0:
                     # if it's just generating array of numbers or empty space
                     if any(
@@ -39,6 +39,7 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
                         raise
                     count = 0
                 count += 1
+                print(result)
 
             json_response: list[dict] = loads(result)
             [
@@ -46,9 +47,10 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
                 for dict_object in json_response
             ]
             if len(json_response) != generation_prompt.count:
-                print("Wrong count, retrying")
+                # print("Wrong count, retrying")
                 continue
             break
         except Exception:
-            print("Failed to generate JSON, retrying")
+            # print("Failed to generate JSON, retrying")
+            pass
     return json_response
