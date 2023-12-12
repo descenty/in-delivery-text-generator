@@ -1,0 +1,18 @@
+FROM nvidia/cuda:11.7.1-devel-ubuntu22.04
+
+RUN apt update && apt install python3.11 python3.11-pip
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+
+# Set environment variable
+ENV CMAKE_ARGS="-DLLAMA_CUBLAS=ON"
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install -r requirements.txt --no-cache-dir
+
+COPY . .
+
+CMD ["faststream", "run", "main:app"]

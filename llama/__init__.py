@@ -15,5 +15,5 @@ download_file(
     "models/mistral-7b.gguf",
 )
 
-llm = Llama("./models/mistral-7b.gguf")
+llm = Llama("./models/mistral-7b.gguf", n_gpu_layers=50)
 print("LOADED")
