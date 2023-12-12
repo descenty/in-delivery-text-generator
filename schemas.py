@@ -28,19 +28,15 @@ class Category(BaseModel):
     title: str
 
 
-class Nutrition(BaseModel):
+class Product(BaseModel):
+    title: str
+    description: str
+    price: float
+    best_before: int
     proteins: float
     fats: float
     carbohydrates: float
     energy: int
-
-
-class Product(BaseModel):
-    title: str
-    description: str
-    price: Decimal
-    best_before: int
-    nutrition: Nutrition
     weight: int
 
 

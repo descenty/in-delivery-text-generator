@@ -37,7 +37,7 @@ async def generate_subcategories(message: GenerateSubcategoriesRequest):
 @broker.subscriber("generate-products")
 async def generate_products(message: GenerateProductsRequest):
     additional_prompt = f"Для продуктового магазина. \
-        Цену пиши в российских рублях. Вес в граммах. Best before in days. \
+        Цену пиcать в российских рублях. Вес в граммах. Best before in days. \
             {message.additional_prompt}"
     json_response = generate_json_response(
         ModelGenerationPrompt(
