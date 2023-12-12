@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    network_mode: host
+    env_file: .env
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: "nvidia"
+              capabilities: [gpu]
+              count: 1
