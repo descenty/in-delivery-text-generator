@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.GPU
     network_mode: host
     env_file: .env
     deploy:
