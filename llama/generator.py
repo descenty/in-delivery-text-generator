@@ -1,4 +1,6 @@
 from json import loads
+import json
+from os import getenv
 from re import match
 from schemas import ModelGenerationPrompt
 from llama import llm, json_grammar
@@ -18,7 +20,7 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
     if generation_prompt.additional_prompt:
         prompt += f"Additional information: {generation_prompt.additional_prompt}\n"
     prompt += f"Generate a JSON list of {generation_prompt.count} {generation_prompt.object_description}"
-    # print(prompt)
+    print(prompt)
 
     while True:
         try:
@@ -39,7 +41,8 @@ def generate_json_response(generation_prompt: ModelGenerationPrompt):
                         raise
                     count = 0
                 count += 1
-                print(result)
+                if json.loads(getenv("DEBUG", "False").lower()):
+                    print(result)
 
             json_response: list[dict] = loads(result)
             [
