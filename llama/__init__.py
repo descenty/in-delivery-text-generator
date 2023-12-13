@@ -1,3 +1,4 @@
+from os import getenv
 from llama_cpp.llama_grammar import LlamaGrammar
 from llama_cpp.llama import Llama
 import httpx
@@ -15,5 +16,7 @@ download_file(
     "models/mistral-7b.gguf",
 )
 
-llm = Llama("./models/mistral-7b.gguf", n_gpu_layers=50)
+llm = Llama(
+    "./models/mistral-7b.gguf", n_gpu_layers=50, n_threads=int(getenv("N_THREADS", 4))
+)
 print("LOADED")
