@@ -22,7 +22,7 @@ async def generate_subcategories(message: GenerateSubcategoriesRequest):
         ModelGenerationPrompt(
             object_type=Category,
             object_description=f"subcategories for '{message.category_title}' category",
-            additional_prompt=f"Для продуктового магазина. {message.additional_prompt}",
+            additional_prompt=f"For a grocery store. {message.additional_prompt}",
             example=Category(slug="fruits-vegetables", title="Fruits and Vegetables"),
             count=message.count,
         )
@@ -36,8 +36,8 @@ async def generate_subcategories(message: GenerateSubcategoriesRequest):
 
 @broker.subscriber("generate-products")
 async def generate_products(message: GenerateProductsRequest):
-    additional_prompt = f"Для продуктового магазина. \
-        Цену пиcать в российских рублях. Вес в граммах. Best before in days. \
+    additional_prompt = f"For a grocery store. \
+        Write the price in Russian rubles. Weight in grams. Best before in days. \
             {message.additional_prompt}"
     json_response = generate_json_response(
         ModelGenerationPrompt(
